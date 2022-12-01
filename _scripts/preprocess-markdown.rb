@@ -5,22 +5,22 @@
 # collect mapping of project name to repo via _config.yml
 name_to_repo = Hash.new
 require 'yaml'
-$basedir = Dir.pwd				
+$basedir = Dir.pwd
 config = YAML.load_file("_config.yml")
 config["projects"].each do |repo|
-	name = repo.split('/').drop(1).join('')	
+	name = repo.split('/').drop(1).join('')
 	name_to_repo[name] = repo
 end
 
-# collect all markdown files 
-mdarray = Dir.glob("projects/**/*.md")
+# collect all markdown files
+mdarray = Dir.glob("projects/work/**/*.md")
 
 # go through each markdown file
 mdarray.each { |md|
 
 	basename = File.basename(md)
 	full_directory = File.dirname(md) + "/"
-	
+
 	# if readme.md, rename to index.md
 	# if index.html already exists, remove
 	if basename =~ /readme/i
@@ -31,11 +31,12 @@ mdarray.each { |md|
 		File.rename(md, indexmd)
 		md = indexmd
 	end
-	
+    print("Working on ",File.dirname(md), "\n")
+
 	# get project name if possible
 	project_name = nil
 	dirarray = full_directory.split('/')
-	temp_name = dirarray[dirarray.index("projects") + 1]
+	temp_name = dirarray[dirarray.index("work") + 1]
 	if temp_name =~ /^[^_]/
 		project_name = temp_name
 	end
@@ -44,20 +45,21 @@ mdarray.each { |md|
 	within_project_directory = full_directory[/projects\/#{project_name}\/(.*)/, 1]
 
 	# if file is lacking YAML front matter, add some
-	contents = File.open(md, "r").read	
-	out = File.new(md, "w")	
-	if contents !~ /^(---\s*\n.*?\n?)^(---\s*$\n?)/m
+	contents = File.open(md, "r").read
+	out = File.new(md, "w")
+	# \A matches the beginning of string
+	if contents !~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
 		out.puts "---"
 		out.puts "layout: project"
 		if project_name != nil
-			title = md.sub(/^.*projects\//, '').sub(/.md$/, '').sub(/index$/, '')
-			out.puts "title: #{title}"		
+			title = md.sub(/^.*projects\/work\//, '').sub(/.md$/, '').sub(/index$/, '')
+			out.puts "title: #{title}"
 			out.puts "project: #{project_name}"
 			out.puts "repo: #{repo}"
 			out.puts "permalink: /:path/:basename:output_ext"
 		end
 		out.puts "---"
-		out.puts	
+		out.puts
 	end
 
 	# go through file and replace all links that point to .md files with the equivalent .html file

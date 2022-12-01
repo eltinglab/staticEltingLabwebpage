@@ -1,16 +1,15 @@
 source 'https://rubygems.org'
 
 # jekyll
-gem "jekyll", "3.1.1"
-gem "redcarpet"
+gem "jekyll", "4.2.0"
 
-# compiling less
-gem 'therubyracer'
-gem 'less'
-
-# minifying
-gem 'jekyll-press'
+# katex
+gem "execjs"
+gem "jekyll-katex"
 
 # octokit
 gem 'octokit'
 gem 'netrc'
+
+# Twitter
+gem 'jekyll-twitter-plugin'
