@@ -1,9 +1,1 @@
----
----
-{
-  "posts" : [
-    {% for post in site.categories.news %}
-    "{{ post.url }}"{% unless forloop.last %},{% endunless %}
-    {% endfor %}
-  ]
-}
+{ "posts" : [ "/news/OpenPositions/", "/news/CytokineticRingPaper/", "/news/New-Papers/", "/news/Zareiesfandabadi-preLight/", "/news/Zareiesfandabadi-Preprint/", "/news/Uzsoy-Preprint/", "/news/NIH-MIRA-grant/", "/news/Begley-Preprint/", "/news/more-new-lab-members/", "/news/CYBORG-cell-grant/", "/news/ana-sofia-goldwater/", "/news/mccormick-symposium/", "/news/our-grant/", "/news/apsmm/", "/news/notre-dame-seminar/", "/news/cmb-seminar/", "/news/welcome-shannon/", "/news/ascb/", "/news/triangle-cytoskeleton-meeting/", "/news/ppep-awards/", "/news/new-members/", "/news/powe-award/", "/news/scope-arrives/", "/news/current-biology-dispatch/", "/news/welcome/" ] }
