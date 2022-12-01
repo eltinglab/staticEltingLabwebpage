@@ -5,22 +5,19 @@ layout: default
 {% assign member = page %}
 
 <div class="row">
-	<div class="col-md-12">
-		<div class="media">
-			{% if member.image %}
-			<img class="pull-left pad-right media-object" width=180 src="{{ site.baseurl }}{{ member.image }}">
-			{% endif %}
-			<div class="media-body titlebox">
-				<div class="bigtitle media-heading">
-					{{ member.title }}
-				</div>
-				<p>
-				<div class="smallhead">
-					{{ member.position }}
-				</div>
-				<p>
-
-
+	<div class="col-lg-12">
+		{% if member.image %}
+		<div class='col-md-2'>
+			<img class="pull-left pad-right media-object d-none d-sm-block" src="{{ member.image }}">
+		</div>
+		{% endif %}
+		<div class="titlebox">
+			<div class="bigtitle">
+				{{ member.title }}
+			</div>
+			<p>
+			<div class="smallhead">
+				{{ member.position }}
 			</div>
 		</div>
 	</div>
@@ -29,7 +26,7 @@ layout: default
 <div class="bigspacer"></div>
 
 <div class="row">
-	<div class="col-md-3">
+	<div class="col-lg-3">
 		{% if member.cv %}
 		<div class="smallhead">
 			CV
@@ -37,7 +34,7 @@ layout: default
 		<div class="pad-left note">
 			<div class="smallspacer"></div>
 			<i class="fa fa-file-text-o fa-fw"></i>
-			<a class="off" href="{{ site.baseurl }}{{ member.cv }}">{{ member.cv | split: '/' | last }}</a>
+			<a class="off" href="{{ member.cv }}">{{ member.cv | split: '/' | last }}</a>
 		</div>
 		<div class="bigspacer"></div>
 		{% endif %}
@@ -81,7 +78,18 @@ layout: default
 		<div class="pad-left note">
 			<div class="smallspacer"></div>
 			<i class="fa fa-calendar fa-fw"></i>
-			<a class="off" href="{{ site.baseurl }}{{ member.calendar }}">{{ member.title }}</a>
+			<a class="off" href="{{ member.calendar }}">{{ member.title }}</a>
+		</div>
+		<div class="bigspacer"></div>
+		{% endif %}
+		{% if member.website %}
+		<div class="smallhead">
+			Website
+		</div>
+		<div class="pad-left note">
+			<div class="smallspacer"></div>
+			<i class="fa fa-globe fa-fw"></i>
+			<a class="off" href="{{ member.website }}">{{ member.website | remove: 'http://' | remove: 'https://' | replace: "/", "/<wbr>" | replace: "_", "_<wbr>" }}</a>
 		</div>
 		<div class="bigspacer"></div>
 		{% endif %}
@@ -98,16 +106,14 @@ layout: default
 		<div class="bigspacer"></div>
 		{% endif %}
 	</div>
-	<div class="col-md-8">
+	<div class="col-lg-8">
 		<div class="post">
 			{{ content }}
 		</div>
 
 		{% assign lastname = member.title | split: ' ' | last %}
 		{% assign firstinitial = member.title | split: ' ' | first | slice: 0 %}
-		<!-- {% assign searchstring = lastname | append: ' ' | append: firstinitial %} -->
-		<!-- commented out the original search string because of authors with different first initials from display name, and currently no last name duplicates -->
-		{% assign searchstring = lastname %}
+		{% assign searchstring = lastname | append: ' ' | append: firstinitial %}
 
 		{% for paper in site.categories.papers %}
 		{% if paper.authors contains searchstring %}
@@ -121,7 +127,7 @@ layout: default
 		<div class="spacer"></div>
 		{% for paper in site.categories.papers %}
 		{% if paper.authors contains searchstring %}
-		<p><a href="{{ site.baseurl }}{{ paper.url }}" class="note">{{ paper.title }}. {{ paper.ref }}</a>
+		<p><a href="{{ paper.url }}" class="off">{{ paper.title }}</a>
 		{% endif %}
 		{% endfor %}
 		{% endif %}
@@ -146,28 +152,50 @@ layout: default
 				{% endif %}
 			{% endfor %}
 			{% if present == true %}
-				<p><a href="{{ site.baseurl }}{{ project.url }}" class="off">{{ project.title }} - {{ project.description }}</a>
+				<p><a href="{{ project.url }}" class="off">{{ project.title }} - {{ project.description }}</a>
 			{% endif %}
 		{% endfor %}
 		{% endif %}
 
-		{% for post in site.categories.news %}
-		{% if member.title == post.author %}
-		{% assign postsq = true %}
-		{% endif %}
+		{% for post in site.categories.blog %}
+			{% if post.author %}
+				{% if member.title == post.author %}
+					{% assign postsq = true %}
+				{% endif %}
+			{% endif %}
+			{% if post.authors %}
+				{% for author in post.authors %}
+					{% if member.title == author %}
+						{% assign postsq = true %}
+					{% endif %}
+				{% endfor %}
+			{% endif %}
 		{% endfor %}
 
 		{% if postsq == true %}
-		<div class="bigspacer"></div>
-		<div class="head">Posts</div>
-		<div class="spacer"></div>
-		{% for post in site.categories.news %}
-		{% if member.title == post.author %}
-		<p><a href="{{ site.baseurl }}{{ post.url }}" class="note">{{ post.title }}</a>
-		{% endif %}
-		{% endfor %}
+			<div class="bigspacer"></div>
+			<div class="head">Posts</div>
+			<div class="spacer"></div>
+			{% for post in site.categories.blog %}
+				{% if post.author %}
+					{% if member.title == post.author %}
+						<p><a href="{{ post.url }}" class="off">{{ post.title }}</a>
+					{% endif %}
+				{% endif %}
+				{% if post.authors %}
+					{% assign found = false %}
+					{% for author in post.authors %}
+						{% if member.title == author %}
+							{% assign found = true %}
+						{% endif %}
+					{% endfor %}
+					{% if found %}
+						<p><a href="{{ post.url }}" class="off">{{ post.title }}</a>
+					{% endif %}
+				{% endif %}
+			{% endfor %}
 		{% endif %}
 
 	</div>
-	<div class="col-md-1"></div>
+	<div class="col-lg-1"></div>
 </div>
