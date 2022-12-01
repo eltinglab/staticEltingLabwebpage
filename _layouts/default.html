@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8"/>
+	<title>{{ page.title }}</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+	<!-- RSS feed -->
+	<link rel="alternate" type="application/rss+xml" title="{{ site.name }}" href="{{ site.url }}{{ site.baseurl }}/feed.xml">
+
+
+    <!-- Customized Bootstrap + Font Awesome + Solarized -->
+    <link href="{{ site.baseurl }}/css/style.css" rel="stylesheet" media="screen">
+
+
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="{{ site.baseurl }}/images/eltinglabfavicon.png"/>
+
+	<!-- Typekit -->
+	<script>
+	  (function(d) {
+		var config = {
+		  kitId: 'xeu8jut',
+		  scriptTimeout: 3000
+		},
+		h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='//use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+	  })(document);
+	</script>
+
+
+	<!-- jQuery -->
+	<script src="{{ site.baseurl }}/js/jquery.min.js"></script>
+
+
+	<!-- Bootstrap -->
+	<script src="{{ site.baseurl }}/js/transition.js"></script>
+	<script src="{{ site.baseurl }}/js/collapse.js"></script>
+
+</head>
+
+<body>
+
+
+	<div id="header">
+		<nav class="navbar navbar-default navbar-static-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-element" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					{% if page.categories.first != 'home' %}
+					<a href="{{ site.baseurl }}/">
+						<img class="logo navbar-brand" src="{{ site.baseurl }}/images/EltingLabLogo.png" data-pin-nopin="true"> </img>
+					</a>
+					<a class="navbar-brand" href="{{ site.baseurl }}/">Elting Lab</a>
+					{% endif %}
+				</div>
+				<div class="collapse navbar-collapse" id="navbar-collapse-element">
+					<ul class="nav navbar-nav navbar-right">
+
+						{% if page.title == 'Research' %}
+						<li class="active">
+						{% else %}
+						<li>
+						{% endif %}
+						<a href="{{ site.baseurl }}/page/research/">research</a></li>
+
+						{% if page.categories.first == 'papers' %}
+						<li class="active">
+						{% else %}
+						<li>
+						{% endif %}
+						<a href="{{ site.baseurl }}/papers/">publications</a></li>
+
+						{% if page.categories.first == 'team' %}
+						<li class="active">
+						{% else %}
+						<li>
+						{% endif %}
+						<a href="{{ site.baseurl }}/team/">team</a></li>
+
+						{% if page.categories.first == 'news' %}
+						<li class="active">
+						{% else %}
+						<li>
+						{% endif %}
+						<a href="{{ site.baseurl }}/news/">news</a></li>
+
+						{% if page.title == 'Join' %}
+						<li class="active">
+						{% else %}
+						<li>
+						{% endif %}
+						<a style="color:green" href="{{ site.baseurl }}/page/join/">join</a></li>
+
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+
+	<div class="container">
+
+	{{ content }}
+
+	</div>
+	      <!-- Static bottom navbar -->
+  <nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#jb-bottom-collapse"> <!-- NOTE! data-target was changed to jb-bottom-collapse -->
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="jb-bottom-collapse">
+        <ul class="nav navbar-nav navbar-left navbar-small">
+          <li><a class="smallhead" href="https://qcdb.ncsu.edu/">QCDB</a></li>
+					<li><a class="smallhead" href="https://sites.google.com/a/ncsu.edu/biophysics/">Biological Physics</a></li>
+          <li><a class="smallhead" href="http://physics.ncsu.edu">Department of Physics</a></li>
+          <li><a class="smallhead" href="http://www.ncsu.edu"> NC State University</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right navbar-small">
+          <li><a class="smallhead" href="{{ site.baseurl }}/page/siteinfo/">Site info</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div>
+  </nav>
+
+	<div id="footer"><span style="display:none">foo</span></div>
+
+</body>
+</html>

@@ -1,0 +1,187 @@
+---
+layout: default
+title: Elting Lab
+categories:
+ - home
+---
+
+<div class="row">
+	<div class="col-md-12">
+		<!--<object class="pull-left biglogo" data="/images/logo.svg" type="image/svg+xml"></object>-->
+		<img class="img-responsive center" src="{{ site.baseurl }}/images/scalingCartoon.png">
+		<div class="bigtitle logobox">
+			Elting Lab
+		</div>
+	</div>
+</div>
+
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="smallhead">
+			<strong><i>We have current openings for trainees at all levels! <a class="off" href="{{ site.baseurl }}/page/join/">More info here!</a></i></strong>
+		</div>
+	</div>
+</div>
+
+<div class="bigspacer"></div>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="smallhead">
+			The Elting Lab combines approaches from physics, biology, and engineering to ask how biological molecules self-assemble into cellular-scale machinery that transduces force and performs mechanical functions.
+		</div>
+	</div>
+</div>
+
+<div class="bigspacer"></div>
+<div class="bigspacer"></div>
+
+<div class="row">
+  <div class="col-md-4">
+    <div class="head">
+      <a class="twitter-timeline"
+      href="https://twitter.com/EltingLab"
+      data-tweet-limit="4"
+      data-height="500"
+      data-link-color="#19CF86">
+      Tweets by EltingLab
+      </a>
+
+      <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
+  </div>
+
+
+	<div class="col-md-4">
+		<div class="head">
+			<a class="off" href="{{ site.baseurl }}/papers/">
+				Publications
+			</a>
+		</div>
+		<div class="bigspacer"></div>
+		<div class="feedbox">
+			{% for paper in site.categories.papers limit:8 %}
+				<div class="note">
+					<i class="fa fa-file-text fa-fw"></i>
+					<a class="off" href="{{ site.baseurl }}{{ paper.url }}">
+					{{ paper.title }}. {{ paper.ref }}
+					</a>
+				</div>
+				<div class="smallspacer"></div>
+				<div class="smallnote">
+					Posted
+					{{ paper.date | date: "%-d %b %Y" }}
+				</div>
+				<div class="spacer"></div>
+				<div class="spacer"></div>
+			{% endfor %}
+		</div>
+		<div class="bigspacer"></div>
+	</div>
+
+  <div class="col-md-4">
+    <div class="head">
+      <a class="off" href="{{ site.baseurl }}/news/">News</a>
+    </div>
+    <div class="bigspacer"></div>
+    <div class="feedbox">
+      {% for post in site.categories.news limit:6 %}
+
+        {% for member in site.categories.team %}
+          {% if member.title == post.author %}
+            {% assign author = member %}
+          {% endif %}
+        {% endfor %}
+
+        <div class="note">
+          <i class="fa fa-comment fa-fw"></i>
+          <a class="off" href="{{ site.baseurl }}{{ post.url }}">
+          {{ post.title }}
+          </a>
+        </div>
+        <div class="smallspacer"></div>
+        <div class="smallnote">
+          Posted
+          {{ post.date | date: "%-d %b %Y" }}
+          {% if author %}
+          by <a class="off" href="{{ site.baseurl }}{{ author.url }}">{{ author.handle }}</a>
+          {% endif %}
+        </div>
+        <div class="spacer"></div>
+        <div class="spacer"></div>
+      {% endfor %}
+    </div>
+    <div class="bigspacer"></div>
+  </div>
+
+
+
+
+
+	<!-- <div class="col-md-4">
+		<div class="head">
+			<a class="off" href="/news/">News</a>
+		</div>
+		<div class="bigspacer"></div>
+		<div class="feedbox">
+			{% for post in site.categories.news limit:6 %}
+
+				{% for member in site.categories.team %}
+					{% if member.title == post.author %}
+						{% assign author = member %}
+					{% endif %}
+				{% endfor %}
+
+				<div class="note">
+					<i class="fa fa-rss fa-fw"></i>
+					<a class="off" href="{{ post.url }}">
+					{{ post.title }}
+					</a>
+				</div>
+				<div class="smallspacer"></div>
+				<div class="smallnote">
+					Posted
+					{{ post.date | date: "%-d %b %Y" }}
+					{% if author %}
+					by <a class="off" href="{{ author.url }}">{{ author.handle }}</a>
+					{% endif %}
+				</div>
+				<div class="spacer"></div>
+				<div class="spacer"></div>
+			{% endfor %}
+		</div>
+		<div class="bigspacer"></div>
+	</div> -->
+</div>
+
+
+<div class="spacer"></div>
+<!--
+<div class="row">
+	<div class="col-md-12">
+		<div class="head">
+			Misc
+		</div>
+		<div class="spacer"></div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12 reduced-gutter">
+		<div class="pad-left">
+			<ul class="list-inline">
+				{% for page in site.categories.misc %}
+				<li class="footernav">
+					<i class="fa fa-angle-right"></i> <a class="off" href="{{ page.url }}">{{ page.title }}</a>
+				</li>
+				{% endfor %}
+				<li class="footernav">
+					<i class="fa fa-angle-right"></i> <a class="off" href="/talks/">Talks</a>
+				</li>
+			</ul>
+		</div>
+		<div class="spacer"></div>
+	</div>
+</div>
+-->
